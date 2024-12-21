@@ -22,13 +22,14 @@ const options = {
   time_24hr: true,
   defaultDate: new Date(),
   minuteIncrement: 1,
-  onClose(selectedDates) { 
+  onClose(selectedDates) {  
     if (selectedDates[0] > new Date()) {
         userSelectedDate = selectedDates[0];
         startBtn.disabled = false;
         const startButtonCheckerInterval = setInterval(() => {
             if (userSelectedDate < new Date()) {
                 startBtn.disabled = true;
+                userSelectedDate = null;
                 clearInterval(startButtonCheckerInterval);
             }
         }, 1_000);
@@ -45,7 +46,12 @@ const options = {
   },
 };
 
-flatpickr(datePickerInput, options);
+const fp = flatpickr(datePickerInput, options);
+setInterval(() => {
+    if (!fp.isOpen && !userSelectedDate) {        
+        fp.setDate(new Date(), false);
+    }
+}, 1_000);
 
 startBtn.addEventListener("click", () => {
     if (userSelectedDate) {
