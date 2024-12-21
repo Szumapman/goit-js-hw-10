@@ -78,3 +78,7 @@
     text-transform: uppercase;
     letter-spacing: 0;
 }
+
+.flatpickr-calendar {
+    background: #F5F5F5;
+}
