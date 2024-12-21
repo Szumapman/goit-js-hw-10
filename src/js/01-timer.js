@@ -57,7 +57,7 @@ startBtn.addEventListener("click", () => {
     if (userSelectedDate) {
         startBtn.disabled = true;
         datePickerInput.disabled = true;
-        startTimer();
+        return startTimer();
     }
 });
 
